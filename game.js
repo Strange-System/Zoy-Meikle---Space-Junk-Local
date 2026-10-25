@@ -125,7 +125,9 @@ class Game {
    * is delivered.
    **/
   resolveDropoff(delta) {
-    if (this.magpie.capturedJunk === null) { 
+    const junk = this.magpie.capturedJunk;
+
+    if (junk === null) {
       return false;
     }
     if (dist(this.mothership.physics.x,this.mothership.physics.y,junk.physics.x,junk.physics.y,) <= Mothership.PICKUP_DIAMETER / 2) {
