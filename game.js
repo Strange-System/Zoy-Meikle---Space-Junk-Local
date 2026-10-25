@@ -165,8 +165,9 @@ class Game {
   }
 
   updateScore(reason) {
-    // TODO (Phase 4): When the reason is "dropoff", add Game.SCORE_DROPOFF
-    // to the score.
+    if (reason === "dropoff") {
+      this.score += Game.SCORE_DROPOFF;
+    }
   }
 
   isLevelComplete() {
