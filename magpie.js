@@ -27,10 +27,13 @@ class Magpie {
     drawEverywhere({
       offset: this.physics,
       drawFn: () => {
-        // TODO (Phase 4): If this.capturedJunk isn't null, draw it here, so
-        // the ship is drawn on top of it. Rotate by the Magpie's rotation,
-        // translate to (0, Magpie.CARGO_Y), and call Junk.drawJunk(). Use
-        // push() and pop() so the ship below isn't moved too.
+        if (this.capturedJunk) {
+          push();
+          rotate(this.physics.rotation);
+          translate(0, Magpie.CARGO_Y);
+          Junk.drawJunk();
+          pop();
+        }
         Magpie.drawMagpie({ rotation: this.physics.rotation, beam: this.beam });
         if (game.debug) {
           this.physics.draw();
@@ -42,8 +45,8 @@ class Magpie {
 
   /** Sets the captured junk to the given one, and turns off the beam. */
   captureJunk(junk) {
-    // TODO (Phase 4): Remember the junk in this.capturedJunk, and switch the
-    // beam off.
+    this.capturedJunk = junk;
+    this.beam = false;
   }
 
   static drawMagpie({ rotation, beam }) { //I'm still trying to understand this, the concept of it being "static" instead of "function", why?
